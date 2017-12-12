@@ -5,6 +5,8 @@ MAINTAINER @jstnn
 ARG user=mpd
 ARG group=audio
 
+RUN [ "cross-build-start" ]
+
 RUN useradd -ms /bin/bash ${user}
 
 RUN apt-get -qq -y update \
@@ -21,6 +23,8 @@ RUN chown -R ${user} /var/lib/mpd \
 RUN chmod g+w /var/lib/mpd/music /var/lib/mpd/playlists /var/lib/mpd/database
 
 COPY mpd.conf /etc/mpd.conf
+
+RUN [ "cross-build-end" ]
 
 USER ${user}
 
